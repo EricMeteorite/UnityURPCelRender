@@ -6,6 +6,7 @@ Shader "Toon/CelTest"
         [Space(5)]
         [KeywordEnum(Base,Hair,Face)] _ShaderEnum("Shader类型",int) = 0
         [Toggle] _IsNight ("In Night", int) = 0
+        [Toggle(_AdditionalLights)] _AddLights ("AddLights", Float) = 1
         [Space(5)]
 
         [Header(High Level Setting)]
@@ -274,6 +275,7 @@ Shader "Toon/CelTest"
             Tags {"LightMode"="UniversalForward" "RenderType"="Opaque"}
             
             HLSLPROGRAM
+            #pragma shader_feature _AdditionalLights
             #pragma vertex ToonPassVert
             #pragma fragment ToonPassFrag
 
@@ -462,7 +464,19 @@ Shader "Toon/CelTest"
                 //return FinalSpecular;
                 //return half4(1,1,1,1);
                 //return FinalRamp + FinalSpecular + RimColors;
-                return (LightColor * SpecRimColor + SpecRimColor) + FinalRamp;
+                //return (LightColor * SpecRimColor + SpecRimColor) + FinalRamp;
+
+                // 计算其他光源
+                #ifdef _AdditionalLights
+                    uint pixelLightCount = GetAdditionalLightsCount();
+                    for (uint lightIndex = 0u; lightIndex < pixelLightCount; ++ lightIndex)
+                    {
+                        // 获取其他光源
+                        Light light = GetAdditionalLight(lightIndex, i.worldPos);
+                        LightColor += half4(light.color, 1.0) * (light.distanceAttenuation * light.shadowAttenuation);
+                    }
+                #endif
+                return (LightColor * SpecRimColor) + FinalRamp * LightColor;
             }
             ENDHLSL
         }
