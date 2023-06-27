@@ -4,7 +4,7 @@ Shader "Toon/CelTest"
     {
         [Header(Shader Setting)]
         [Space(5)]
-        [KeywordEnum(Base,Hair,Face)] _ShaderEnum("Shader类型",int) = 0
+        [KeywordEnum(Base,Hair,Face,NoneSDFFace)] _ShaderEnum("Shader类型",int) = 0
         [Toggle] _IsNight ("In Night", int) = 0
         [Toggle(_AdditionalLights)] _AddLights ("AddLights", Float) = 1
         [Space(5)]
@@ -41,6 +41,7 @@ Shader "Toon/CelTest"
         [Header(Shadow Setting)]
         [Space(5)]
         _LightMap ("LightMap", 2D) = "grey" {}
+        _SDF ("SDF", 2D) = "grey" {}
         _RampMap ("RampMap", 2D) = "white" {}
         _ShadowSmooth ("Shadow Smooth", Range(0, 1)) = 0.5
         _RampShadowRange ("Ramp Shadow Range", Range(0.5, 1.0)) = 0.8
@@ -110,12 +111,13 @@ Shader "Toon/CelTest"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
         #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
         //#include "NiloOutlineUtil.hlsl"
-        #pragma shader_feature _SHADERENUM_BASE _SHADERENUM_HAIR _SHADERENUM_FACE
+        #pragma shader_feature _SHADERENUM_BASE _SHADERENUM_HAIR _SHADERENUM_FACE _SHADERENUM_NONESDFFACE
 
         int _IsNight;
         float3 _LightDirection;
         TEXTURE2D(_MainTex);            SAMPLER(sampler_MainTex);
         TEXTURE2D(_LightMap);           SAMPLER(sampler_LightMap);
+        TEXTURE2D(_SDF);                SAMPLER(sampler_SDF);
         TEXTURE2D(_RampMap);            SAMPLER(sampler_RampMap);
         TEXTURE2D(_MetalMap);           SAMPLER(sampler_MetalMap);
         TEXTURE2D(_CameraDepthTexture); SAMPLER(sampler_CameraDepthTexture);
@@ -138,6 +140,7 @@ Shader "Toon/CelTest"
         half3 _EmissionMapChannelMask;
 
         float4 _LightMap_ST;
+        float4 _SDF_ST;
         float4 _RampMap_ST;
         half _ShadowSmooth;
         half _RampShadowRange;
@@ -373,7 +376,7 @@ Shader "Toon/CelTest"
                     float RdotL = dot(normalize(rightDir.xz), normalize(lightDir.xz));
                     // 切换贴图正反
                     float2 FaceMapUV = float2(lerp(i.uv.x, 1-i.uv.x, step(0, RdotL)), i.uv.y);
-                    float FaceMap = SAMPLE_TEXTURE2D(_LightMap, sampler_LightMap, FaceMapUV).r;
+                    float FaceMap = SAMPLE_TEXTURE2D(_SDF, sampler_SDF, FaceMapUV).r;
                     // 下面这句话是错的
                     //float FaceMap = lerp(LightMapColor.r, 1-LightMapColor.r, step(0, RdotL)) * step(0, FdotL);
 
@@ -581,5 +584,7 @@ Shader "Toon/CelTest"
         {
             Tags {"LightMode" = "DepthOnly"}
         }
+
+        //UsePass "Universal Render Pipeline/Lit/ShadowCaster"
     }
 }
