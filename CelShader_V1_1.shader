@@ -12,6 +12,12 @@ Shader "Toon/CelTest"
         [Header(High Level Setting)]
         [ToggleUI]_IsFace("Is Face? (please turn on if this is a face material)", Float) = 0
 
+        [Space(5)]
+        [Header(Stencil)]
+        _StencilRef ("_StencilRef", Range(0, 255)) = 0
+        [Enum(UnityEngine.Rendering.CompareFunction)]_StencilComp ("_StencilComp", Float) = 0
+
+        [Space(5)]
         [Header(Main Texture Setting)]
         [Space(5)]
         [MainTexture] _MainTex ("Texture", 2D) = "white" {}
@@ -273,6 +279,13 @@ Shader "Toon/CelTest"
         Pass
         {
             Tags {"LightMode"="UniversalForward" "RenderType"="Opaque"}
+
+            Stencil
+            {
+                Ref [_StencilRef]
+                Comp [_StencilComp]
+                Pass replace
+            }
             
             HLSLPROGRAM
             #pragma shader_feature _AdditionalLights
