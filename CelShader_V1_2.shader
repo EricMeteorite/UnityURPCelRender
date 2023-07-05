@@ -1,4 +1,4 @@
-Shader "Toon/CelTest"
+Shader "Toon/CelTest1.2"
 {
     Properties
     {
@@ -33,6 +33,7 @@ Shader "Toon/CelTest"
         [Header(Emission)]
         [Toggle]_EnableEmission ("Enable Emission", Float) = 0
         _Emission ("Emission", range(0.0, 20.0)) = 1.0
+        _EmissionMap ("EmissionMap", 2D) = "black" {}
         [HDR]_EmissionColors ("Emission Color", color) = (0, 0, 0, 0)
         _EmissionBloomFactor ("Emission Bloom Factor", range(0.0, 10.0)) = 1.0
         [HideInInspector]_EmissionMapChannelMask ("_EmissionMapChannelMask", Vector) = (1, 1, 1, 0)
@@ -48,6 +49,13 @@ Shader "Toon/CelTest"
         _RangeAO ("AO Range", Range(1, 2)) = 1.5
         _ShadowColor ("Shadow Color", Color) = (1.0, 1.0, 1.0, 1.0)
         [Space(30)]
+
+        [Header(CelHairSpecular Setting)]
+        [Space(5)]
+        [Toggle]_EnableHairSpecular ("Enable Hair Specular", Float) = 0
+        _Exponent("Exponent", float) = 1
+        _HairSpecularPower("Hair Specular Power", float) = 1
+        _Scale("Scale", Range(0, 1)) = 1
 
         [Header(Face Setting)]
         [Space(5)]
@@ -116,6 +124,7 @@ Shader "Toon/CelTest"
         int _IsNight;
         float3 _LightDirection;
         TEXTURE2D(_MainTex);            SAMPLER(sampler_MainTex);
+        TEXTURE2D(_EmissionMap);        SAMPLER(sampler_EmissionMap);
         TEXTURE2D(_LightMap);           SAMPLER(sampler_LightMap);
         TEXTURE2D(_SDF);                SAMPLER(sampler_SDF);
         TEXTURE2D(_RampMap);            SAMPLER(sampler_RampMap);
@@ -133,6 +142,7 @@ Shader "Toon/CelTest"
         float4 _BloomMap_ST;
         float _BloomFactor;
         float _EnableEmission;
+        float4 _EmissionMap_ST;
         half4 _EmissionColors;
         float _Emission;
         float _EmissionBloomFactor;
@@ -155,6 +165,11 @@ Shader "Toon/CelTest"
         half _StepSpecularIntensity;
         half _MetalSpecularGloss;
         half _MetalSpecularIntensity;
+
+        float _EnableHairSpecular;
+        float _Exponent;
+        float _HairSpecularPower;
+        float _Scale;
 
         float _FaceShadowOffset;
         float _FaceShadowPow;
@@ -276,6 +291,24 @@ Shader "Toon/CelTest"
             //you can replace it to your own method! Here we will write a simple world space method for tutorial reason, it is not the best method!
             float outlineExpandAmount = _OutlineWidth * GetOutlineCameraFovAndDistanceFixMultiplier(positionVS_Z) * _EnableOutline;
             return positionWS + normalWS * outlineExpandAmount; 
+        }
+
+        //计算各向异性光照系数，基于Kajyiya-Kay Model
+        float StrandSpecular(float3 V, float3 T, float3 L, float3 N, float exponent,float scale, float hairSpecularPower){
+            //V：点到相机方向
+            //T：副切削方向
+            //L：点到光源方向，如果是直射光就是光的照射方向的反方向
+            //N：法线方向
+
+            float nl = saturate(dot(N, L));//影响反射
+            float3 H = normalize(L + V);//光源方向和相机方向是高光模型的一部分
+            T = normalize((scale * 2 - 1) * N + T);//这个地方是为了调整天使环位置
+            float dotTH = dot(T, H);
+            float sinTH = sqrt(1.0 - dotTH * dotTH);
+            float dirAtten = smoothstep(-1.0, 0.0, dotTH);
+            float factor = dirAtten * pow(sinTH, exponent) * hairSpecularPower;
+            factor *= nl;
+            return factor;
         }
         ENDHLSL
 
@@ -466,7 +499,7 @@ Shader "Toon/CelTest"
 
                 // Emission & Bloom
                 half4 Emission;
-                Emission.rgb = _Emission * _ShadowColor.rgb * _EmissionColors.rgb - SpecDiffuse.rgb;
+                Emission.rgb = _Emission * _ShadowColor.rgb * _EmissionColors.rgb * SAMPLE_TEXTURE2D(_EmissionMap, sampler_EmissionMap, i.uv) - SpecDiffuse.rgb;
                 Emission.a = _EmissionBloomFactor * BaseColor.a;
 
                 half4 SpecRimEmission;
@@ -492,6 +525,12 @@ Shader "Toon/CelTest"
                         LightColor += half4(light.color, 1.0) * (light.distanceAttenuation * light.shadowAttenuation);
                     }
                 #endif
+
+                #if _SHADERENUM_HAIR
+                    float factor = StrandSpecular(viewDir, i.worldBiTangent, lightDir, i.worldNormal, _Exponent, _Scale, _HairSpecularPower) * _EnableHairSpecular;
+                    LightColor = LightColor + factor * BaseColor;
+                #endif
+
                 return (LightColor * SpecRimColor) + FinalRamp * LightColor;
             }
             ENDHLSL
@@ -585,6 +624,6 @@ Shader "Toon/CelTest"
             Tags {"LightMode" = "DepthOnly"}
         }
 
-        //UsePass "Universal Render Pipeline/Lit/ShadowCaster"
+        UsePass "Universal Render Pipeline/Lit/ShadowCaster"
     }
 }
