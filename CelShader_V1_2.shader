@@ -48,6 +48,10 @@ Shader "Toon/CelTest1.2"
         _RampShadowRange ("Ramp Shadow Range", Range(0.5, 1.0)) = 0.8
         _RangeAO ("AO Range", Range(1, 2)) = 1.5
         _ShadowColor ("Shadow Color", Color) = (1.0, 1.0, 1.0, 1.0)
+        [Space(5)]
+        [Toggle]_EnableFakeShadow ("Enable Fake Shadow", Float) = 0
+        _FakeShadowMap ("FakeShadowMap", 2D) = "black" {}
+        _FakeShadowColor ("Fake Shadow Color", Color) = (1.0, 1.0, 1.0, 1.0)
         [Space(30)]
 
         [Header(CelHairSpecular Setting)]
@@ -126,6 +130,7 @@ Shader "Toon/CelTest1.2"
         TEXTURE2D(_MainTex);            SAMPLER(sampler_MainTex);
         TEXTURE2D(_EmissionMap);        SAMPLER(sampler_EmissionMap);
         TEXTURE2D(_LightMap);           SAMPLER(sampler_LightMap);
+        TEXTURE2D(_FakeShadowMap);      SAMPLER(sampler_FakeShadowMap);
         TEXTURE2D(_SDF);                SAMPLER(sampler_SDF);
         TEXTURE2D(_RampMap);            SAMPLER(sampler_RampMap);
         TEXTURE2D(_MetalMap);           SAMPLER(sampler_MetalMap);
@@ -156,6 +161,9 @@ Shader "Toon/CelTest1.2"
         half _RampShadowRange;
         half _RangeAO;
         half4 _ShadowColor;
+        float _EnableFakeShadow;
+        float4 _FakeShadowMap_ST;
+        half4 _FakeShadowColor;
 
         int _EnableSpecular;
         float4 _MetalMap_ST;
@@ -348,6 +356,7 @@ Shader "Toon/CelTest1.2"
             {
                 float4 BaseColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv) * _MainColor;
                 float4 LightMapColor = SAMPLE_TEXTURE2D(_LightMap, sampler_LightMap, i.uv);
+                float4 FakeShadow = SAMPLE_TEXTURE2D(_FakeShadowMap, sampler_FakeShadowMap, i.uv);
                 Light mainLight = GetMainLight();
                 half4 LightColor = half4(mainLight.color, 1.0);
                 half3 lightDir = normalize(mainLight.direction);
@@ -362,6 +371,7 @@ Shader "Toon/CelTest1.2"
                 halfLambert = smoothstep(0.0, _ShadowSmooth, halfLambert);
                 // 常暗阴影
                 float ShadowAO = smoothstep(0.1, LightMapColor.g, 0.7) * _RangeAO;
+                float4 FakeShadowColor = FakeShadow.a * _FakeShadowColor * _EnableFakeShadow;
 
                 float RampPixelX = 0.00390625;  //0.00390625 = 1/256
                 float RampPixelY = 0.03125;     //0.03125 = 1/16/2   尽量采样到ramp条带的正中间，以避免精度误差
@@ -532,7 +542,7 @@ Shader "Toon/CelTest1.2"
                     LightColor = LightColor + factor * BaseColor;
                 #endif
 
-                return (LightColor * SpecRimColor) + FinalRamp * LightColor;
+                return (LightColor * SpecRimColor) + FinalRamp * LightColor * (1-FakeShadowColor);
             }
             ENDHLSL
         }
