@@ -134,7 +134,7 @@ Shader "Toon/CelTest1.2"
 
         // 单个材质独有的参数尽量放在 CBUFFER 中，以提高性能
         CBUFFER_START(UnityPerMaterial)
-        float   _IsFace;
+        float _IsFace;
         float4 _MainTex_ST;
         half4 _MainColor;
 
@@ -154,6 +154,7 @@ Shader "Toon/CelTest1.2"
         float4 _RampMap_ST;
         half _ShadowSmooth;
         half _RampShadowRange;
+        half _RangeAO;
         half4 _ShadowColor;
 
         int _EnableSpecular;
@@ -194,11 +195,11 @@ Shader "Toon/CelTest1.2"
         float _OtherRimPow;
 
         float _EnableOutline;
-        float   _OutlineWidth;
-        half4   _OutlineColor;
-        float   _OutlineZOffset;
-        float   _OutlineZOffsetMaskRemapStart;
-        float   _OutlineZOffsetMaskRemapEnd;
+        float _OutlineWidth;
+        half4 _OutlineColor;
+        float _OutlineZOffset;
+        float _OutlineZOffsetMaskRemapStart;
+        float _OutlineZOffsetMaskRemapEnd;
         CBUFFER_END
 
         struct a2v{
@@ -360,7 +361,7 @@ Shader "Toon/CelTest1.2"
                 // 依据原来的lambert值，保留0到一定数值的smooth渐变，大于这一数值的全部采样ramp最右边的颜色，从而形成硬边
                 halfLambert = smoothstep(0.0, _ShadowSmooth, halfLambert);
                 // 常暗阴影
-                float ShadowAO = smoothstep(0.1, LightMapColor.g, 0.7);
+                float ShadowAO = smoothstep(0.1, LightMapColor.g, 0.7) * _RangeAO;
 
                 float RampPixelX = 0.00390625;  //0.00390625 = 1/256
                 float RampPixelY = 0.03125;     //0.03125 = 1/16/2   尽量采样到ramp条带的正中间，以避免精度误差
