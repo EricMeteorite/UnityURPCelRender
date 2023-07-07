@@ -1,0 +1,262 @@
+fileFormatVersion: 2
+guid: 81308f9f92e34694bb756e6cac6a380c
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: BrowDownLeft
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: BrowDownRight
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: BrowInnerUp
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: BrowOuterUpLeft
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: BrowOuterUpRight
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: CheekPuff
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: CheekSquintLeft
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: CheekSquintRight
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: EyeBlinkLeft
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: EyeBlinkRight
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: EyeLookDownLeft
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: EyeLookDownRight
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: EyeLookInLeft
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: EyeLookInRight
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: EyeLookOutLeft
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: EyeLookOutRight
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: EyeLookUpLeft
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: EyeLookUpRight
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: EyeSquintLeft
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: EyeSquintRight
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: EyeWideLeft
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: EyeWideRight
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: JawForward
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: JawLeft
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: JawOpen
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: JawRight
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: MouthFunnel
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: NoseSneerLeft
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: NoseSneerRight
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: aa
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: angry
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: blink
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: blinkLeft
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: blinkRight
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: ee
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: happy
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: ih
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: lookDown
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: lookLeft
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: lookRight
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: lookUp
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: neutral
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: oh
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: ou
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: relaxed
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Expression
+      assembly: VRM10
+      name: sad
+    second: {instanceID: 0}
+  - first:
+      type: UniVRM10:VRM10Object
+      assembly: VRM10
+      name: _vrm1_
+    second: {fileID: 5929401533440927806, guid: 81308f9f92e34694bb756e6cac6a380c, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: U_Face
+    second: {fileID: 2100000, guid: fa7c8e3c9d4836343a8feea44da9fdb2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: U_costume
+    second: {fileID: 2100000, guid: f1b5628044a1fa24fb1b214c38820448, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: U_hairt
+    second: {fileID: 2100000, guid: 602645cbe32428144b3a630b4898967a, type: 2}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: f66ead3390398f443aa127b741826ad9, type: 3}
+  MigrateToVrm1: 1
+  RenderPipeline: 1

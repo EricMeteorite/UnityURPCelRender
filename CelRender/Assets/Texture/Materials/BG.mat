@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BG
+  m_Shader: {fileID: 4800000, guid: 785312c4bc94e6247b9bc654df51d2a3, type: 3}
+  m_ValidKeywords:
+  - _AdditionalLights
+  - _SHADERENUM_BASE
+  m_InvalidKeywords:
+  - ENABLE_BLOOM_MASK
+  - _ENABLERIM_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BloomMap:
+        m_Texture: {fileID: 2800000, guid: d59bc77851032744089d499e37730496, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FakeShadowMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: d59bc77851032744089d499e37730496, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OutlineZOffsetMaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RampMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SDF:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AddLights: 1
+    - _BlinnPhongSpecularGloss: 5
+    - _BlinnPhongSpecularIntensity: 1
+    - _BloomFactor: 0
+    - _DarkSideRimPow: 1
+    - _DarkSideRimSmooth: 0.01
+    - _Emission: 1
+    - _EmissionBloomFactor: 1
+    - _EnableBloomMask: 1
+    - _EnableEmission: 0
+    - _EnableFakeShadow: 0
+    - _EnableHairSpecular: 0
+    - _EnableOutline: 0
+    - _EnableRim: 1
+    - _EnableRimDS: 0
+    - _EnableRimOther: 0
+    - _EnableRims: 0
+    - _EnableSpecular: 0
+    - _Exponent: 1
+    - _FaceShadowOffset: 0.1
+    - _FaceShadowPow: 0.1
+    - _HairSpecularPower: 1
+    - _IsFace: 0
+    - _IsNight: 0
+    - _MetalSpecularGloss: 0.5
+    - _MetalSpecularIntensity: 1
+    - _OtherRimPow: 10
+    - _OtherRimSmooth: 0.01
+    - _OutlineWidth: 1
+    - _OutlineZOffset: 0.0001
+    - _OutlineZOffsetMaskRemapEnd: 1
+    - _OutlineZOffsetMaskRemapStart: 0
+    - _RampShadowRange: 0.8
+    - _RangeAO: 1.5
+    - _RimOffsets: 0.1
+    - _RimPow: 0
+    - _RimSmooth: 0.001
+    - _RimThresholds: 1
+    - _Scale: 1
+    - _ShaderEnum: 0
+    - _ShadowSmooth: 0.5
+    - _StencilComp: 0
+    - _StencilRef: 0
+    - _StepSpecularGloss: 0.5
+    - _StepSpecularIntensity: 0.5
+    m_Colors:
+    - _DarkSideRimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColors: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionMapChannelMask: {r: 1, g: 1, b: 1, a: 0}
+    - _FakeShadowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OtherRimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimColors: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
