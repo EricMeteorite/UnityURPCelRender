@@ -28,7 +28,7 @@ Shader "Toon/CelTest1.2"
         [Space(5)]
         [Toggle(ENABLE_BLOOM_MASK)]_EnableBloomMask ("Enable Bloom", float) = 0.0
         [NoScaleOffset]_BloomMap ("Bloom/Emission Map", 2D) = "black" { }
-        _BloomFactor ("Common Bloom Factor", range(0.0, 1.0)) = 1.0
+        _BloomFactor ("Common Bloom Factor", range(0.0, 1.0)) = 0.001
 
         [Header(Emission)]
         [Toggle]_EnableEmission ("Enable Emission", Float) = 0
@@ -510,7 +510,8 @@ Shader "Toon/CelTest1.2"
 
                 // Emission & Bloom
                 half4 Emission;
-                Emission.rgb = _Emission * _ShadowColor.rgb * _EmissionColors.rgb * SAMPLE_TEXTURE2D(_EmissionMap, sampler_EmissionMap, i.uv) - SpecDiffuse.rgb;
+                float4 EmissionMap = SAMPLE_TEXTURE2D(_EmissionMap, sampler_EmissionMap, i.uv);
+                Emission.rgb = _Emission * _ShadowColor.rgb * _EmissionColors.rgb * EmissionMap * _EnableEmission - SpecDiffuse.rgb;
                 Emission.a = _EmissionBloomFactor * BaseColor.a;
 
                 half4 SpecRimEmission;
