@@ -11,3 +11,7 @@ https://zhuanlan.zhihu.com/p/360229590
 https://zhuanlan.zhihu.com/p/435005339
 https://zhuanlan.zhihu.com/p/490406107
 https://zhuanlan.zhihu.com/p/468209534
+https://github.com/Zzzzohar/Ramp-Tools
+https://github.com/ashyukiha/GenshinCharacterShaderZhihuVer
+https://github.com/ColinLeung-NiloCat/UnityURPToonLitShaderExample
+https://zhuanlan.zhihu.com/p/547129280
