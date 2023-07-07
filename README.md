@@ -1,5 +1,5 @@
 # UnityURPCelRender
-The Cel Shader for Unity URP. Unity version for Project files is 2021.3.19f1
+The Cel Shader for Unity URP.
 
 Effect:
 ![CelRender_Main Camera_2023-07-08-00-59-29_3840x2160](https://github.com/EricMeteorite/UnityURPCelRender/assets/70465132/c992e04a-18c0-4283-85f9-525d5dbd6846)
